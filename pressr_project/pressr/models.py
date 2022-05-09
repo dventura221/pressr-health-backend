@@ -28,7 +28,7 @@ class User(models.Model):
     dob = models.DateField(blank=True, null=True)
     photo_url = models.TextField(null=True)
     provider = models.ForeignKey(
-        Provider, on_delete=models.CASCADE, blank=True, null=True)
+        Provider, on_delete=models.CASCADE, blank=True, null=True, related_name='users')
 
     def __str__(self):
         return (self.last_name + ", " + self.first_name)
