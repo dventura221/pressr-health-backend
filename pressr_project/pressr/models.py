@@ -1,6 +1,4 @@
 from django.db import models
-# from django.contrib.contenttypes.models import ContentType
-# from django.contrib.contenttypes import fields
 
 # Create your models here.
 
@@ -8,7 +6,8 @@ from django.db import models
 class Provider(models.Model):
     first_name = models.CharField(max_length=100, blank=False)
     last_name = models.CharField(max_length=100, blank=False)
-    photo_url = models.TextField(null=True)
+    photo_url = models.TextField(
+        null=True, default='https://i.imgur.com/3kkOeEY.jpg')
     provider_choices = [
         ('Physician', 'Physician'),
         ('PA', 'PA'),
@@ -24,9 +23,9 @@ class Provider(models.Model):
 class User(models.Model):
     first_name = models.CharField(max_length=101, blank=False)
     last_name = models.CharField(max_length=100, blank=False)
-    # https://stackoverflow.com/questions/22212479/display-date-of-birth-in-django-app
     dob = models.DateField(blank=True, null=True)
-    photo_url = models.TextField(null=True)
+    photo_url = models.TextField(
+        null=True, default='https://i.imgur.com/3kkOeEY.jpg')
     provider = models.ForeignKey(
         Provider, on_delete=models.CASCADE, blank=True, null=True, related_name='users')
 
@@ -43,7 +42,7 @@ class Reading(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return (str(self.systolic) + " / " + str(self.diastolic))
+        return (str(self.systolic) + " / " + str(self.diastolic) + ', ' + str(self.user) + ' on ' + str(self.created_at))
 
 
 comment_choices = (
