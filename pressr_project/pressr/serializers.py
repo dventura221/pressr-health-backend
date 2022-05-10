@@ -9,7 +9,7 @@ class ProviderSerializer(serializers.HyperlinkedModelSerializer):
         read_only=True
     )
 
-    comments = serializers.HyperlinkedRealtedField(
+    comments = serializers.HyperlinkedRelatedField(
         view_name='comment_detail',
         many=True,
         read_only=True
@@ -21,18 +21,20 @@ class ProviderSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Provider
-        fields = ('id', 'provider_url', 'first_name',
-                  'last_name', 'photo_url', 'provider_type',)
+        fields = (
+            'id', 'provider_url', 'first_name', 'last_name', 'photo_url', 'provider_type', 'users',
+            'comments',
+        )
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    readings = serializers.HyperlinkedRealtedField(
+    readings = serializers.HyperlinkedRelatedField(
         view_name='reading_detail',
         many=True,
         read_only=True
     )
 
-    comments = serializers.HyperlinkedRealtedField(
+    comments = serializers.HyperlinkedRelatedField(
         view_name='comment_detail',
         many=True,
         read_only=True
@@ -50,8 +52,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'dob',
-                  'photo_url', 'provider', 'provider_id',)
+        fields = (
+            'id', 'first_name', 'last_name', 'dob', 'photo_url', 'provider', 'provider_id', 'readings',
+            'comments',
+        )
 
 
 class ReadingSerializer(serializers.HyperlinkedModelSerializer):
@@ -67,7 +71,9 @@ class ReadingSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Reading
-        fields = ('id', 'user', 'user_id', 'systolic', 'diastolic',)
+        fields = (
+            'id', 'user', 'user_id', 'systolic', 'diastolic', 'created_at', 'updated_at',
+        )
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
@@ -103,5 +109,6 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'provider', 'provider_id', 'user', 'user_id',
-                  'reading', 'reading_id' 'author_of_comment', 'content',)
+        fields = (
+            'id', 'provider', 'provider_id', 'user', 'user_id', 'reading', 'reading_id', 'author_of_comment', 'content', 'created_at', 'updated_at',
+        )

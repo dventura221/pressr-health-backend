@@ -39,6 +39,8 @@ class Reading(models.Model):
         User, on_delete=models.CASCADE, related_name='readings')
     systolic = models.IntegerField()
     diastolic = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return (str(self.systolic) + " / " + str(self.diastolic))
@@ -54,12 +56,14 @@ class Comment(models.Model):
     author_of_comment = models.CharField(
         max_length=8, choices=comment_choices, default=None)
     provider = models.ForeignKey(
-        Provider, on_delete=models.CASCADE, blank=True, null=True)
+        Provider, on_delete=models.CASCADE, blank=True, null=True, related_name='comments', default=0)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, blank=True, null=True)
+        User, on_delete=models.CASCADE, blank=True, null=True, related_name='comments', default=0)
     reading = models.ForeignKey(
         Reading, on_delete=models.CASCADE, related_name='comments')
     content = models.TextField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return (self.content)
