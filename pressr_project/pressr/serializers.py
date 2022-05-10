@@ -50,11 +50,15 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         source='provider'
     )
 
+    user_url = serializers.ModelSerializer.serializer_url_field(
+        view_name='user_detail'
+    )
+
     class Meta:
         model = User
         fields = (
             'id', 'first_name', 'last_name', 'dob', 'photo_url', 'provider', 'provider_id', 'readings',
-            'comments',
+            'comments', 'user_url',
         )
 
 
@@ -69,10 +73,14 @@ class ReadingSerializer(serializers.HyperlinkedModelSerializer):
         source='user'
     )
 
+    reading_url = serializers.ModelSerializer.serializer_url_field(
+        view_name='reading_detail'
+    )
+
     class Meta:
         model = Reading
         fields = (
-            'id', 'user', 'user_id', 'systolic', 'diastolic', 'created_at', 'updated_at',
+            'id', 'user', 'user_id', 'systolic', 'diastolic', 'created_at', 'updated_at', 'reading_url',
         )
 
 
