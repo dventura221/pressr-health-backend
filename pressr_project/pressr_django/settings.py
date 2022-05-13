@@ -47,7 +47,8 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.AllowAny',
     ]
 }
 
@@ -71,7 +72,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://hostname.example.com',
     'http://localhost:8000',
     'http://localhost:3000',
-    'http://127.0.0.1:9000'
+    'http://127.0.0.1:9000',
+    'http://localhost:8000/users/',
 ]
 
 CORS_ALLOWED_ORIGINS = [
