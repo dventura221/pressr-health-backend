@@ -6,6 +6,8 @@ from django.db import models
 class Provider(models.Model):
     first_name = models.CharField(max_length=100, blank=False)
     last_name = models.CharField(max_length=100, blank=False)
+    username = models.CharField(max_length=100, default='username')
+    password = models.CharField(max_length=100, default='password')
     photo_url = models.TextField(
         null=True, default='https://i.imgur.com/3kkOeEY.jpg')
     provider_choices = [
@@ -24,6 +26,8 @@ class User(models.Model):
     first_name = models.CharField(max_length=101, blank=False)
     last_name = models.CharField(max_length=100, blank=False)
     dob = models.DateField(blank=True, null=True)
+    username = models.CharField(max_length=100, default='username')
+    password = models.CharField(max_length=100, default='password')
     photo_url = models.TextField(
         null=True, default='https://i.imgur.com/3kkOeEY.jpg')
     provider = models.ForeignKey(

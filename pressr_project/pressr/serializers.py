@@ -22,7 +22,7 @@ class ProviderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Provider
         fields = (
-            'id', 'provider_url', 'first_name', 'last_name', 'photo_url', 'provider_type', 'users',
+            'id', 'provider_url', 'first_name', 'last_name', 'username', 'password', 'photo_url', 'provider_type', 'users',
             'comments',
         )
 
@@ -57,7 +57,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id', 'first_name', 'last_name', 'dob', 'photo_url', 'provider', 'provider_id', 'readings',
+            'id', 'first_name', 'last_name', 'dob', 'username', 'password', 'photo_url', 'provider', 'provider_id', 'readings',
             'comments', 'user_url',
         )
 
